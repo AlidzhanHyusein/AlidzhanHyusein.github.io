@@ -1,15 +1,13 @@
-// DOM Elements
+
 const navToggle = document.getElementById("nav-toggle");
 const navMenu = document.getElementById("nav-menu");
 const navLinks = document.querySelectorAll(".nav-link");
 
-// Mobile Navigation Toggle
 navToggle.addEventListener("click", () => {
   navMenu.classList.toggle("active");
   navToggle.classList.toggle("active");
 });
 
-// Close mobile menu when clicking on a link
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     navMenu.classList.remove("active");
@@ -17,7 +15,6 @@ navLinks.forEach((link) => {
   });
 });
 
-// Smooth scrolling for navigation links
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -25,7 +22,7 @@ navLinks.forEach((link) => {
     const targetSection = document.querySelector(targetId);
 
     if (targetSection) {
-      const offsetTop = targetSection.offsetTop - 70; // Account for fixed navbar
+      const offsetTop = targetSection.offsetTop - 70;
       window.scrollTo({
         top: offsetTop,
         behavior: "smooth",
@@ -34,7 +31,6 @@ navLinks.forEach((link) => {
   });
 });
 
-// Navbar background on scroll
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
   const scrolled = window.pageYOffset;
@@ -48,7 +44,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Intersection Observer for animations
 const observerOptions = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
@@ -63,12 +58,9 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Elements to animate on scroll
 const animateElements = document.querySelectorAll(
   ".project-card, .skill-item, .about-text, .contact-content"
 );
-
-// Set initial styles and observe elements
 animateElements.forEach((el) => {
   el.style.opacity = "0";
   el.style.transform = "translateY(30px)";
@@ -76,7 +68,6 @@ animateElements.forEach((el) => {
   observer.observe(el);
 });
 
-// Active navigation highlight
 window.addEventListener("scroll", () => {
   let current = "";
   const sections = document.querySelectorAll("section");
@@ -97,7 +88,6 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Parallax effect for hero section
 window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
   const parallaxElements = document.querySelectorAll(".floating-element");
@@ -109,7 +99,6 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Initialize fade-in animation for hero title instead of typing
 window.addEventListener("load", () => {
   const heroTitle = document.querySelector(".hero-title");
   if (heroTitle) {
@@ -124,7 +113,6 @@ window.addEventListener("load", () => {
   }
 });
 
-// Project card hover effects
 const projectCards = document.querySelectorAll(".project-card");
 
 projectCards.forEach((card) => {
@@ -137,7 +125,6 @@ projectCards.forEach((card) => {
   });
 });
 
-// Skill items hover animation
 const skillItems = document.querySelectorAll(".skill-item");
 
 skillItems.forEach((item) => {
@@ -153,7 +140,6 @@ skillItems.forEach((item) => {
   });
 });
 
-// Social links hover effects
 const socialLinks = document.querySelectorAll(".social-link");
 
 socialLinks.forEach((link) => {
@@ -166,7 +152,6 @@ socialLinks.forEach((link) => {
   });
 });
 
-// Smooth reveal animation for sections
 function revealSection(entries, observer) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -183,7 +168,6 @@ document.querySelectorAll("section").forEach((section) => {
   sectionObserver.observe(section);
 });
 
-// Add CSS class for revealed sections
 const style = document.createElement("style");
 style.textContent = `
     section {
@@ -208,12 +192,10 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Button click effects
 const buttons = document.querySelectorAll(".btn");
 
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
-    // Create ripple effect
     const ripple = document.createElement("span");
     const rect = this.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
@@ -243,7 +225,6 @@ buttons.forEach((button) => {
   });
 });
 
-// Add ripple animation CSS
 const rippleStyle = document.createElement("style");
 rippleStyle.textContent = `
     @keyframes ripple {
@@ -255,7 +236,6 @@ rippleStyle.textContent = `
 `;
 document.head.appendChild(rippleStyle);
 
-// Cursor trail effect (optional, for modern browsers)
 if (window.innerWidth > 768) {
   const cursor = {
     delay: 8,
@@ -269,7 +249,6 @@ if (window.innerWidth > 768) {
     $outline: document.createElement("div"),
 
     init: function () {
-      // Cursor dot
       this.$dot.style.cssText = `
                 position: fixed;
                 left: 0;
@@ -285,7 +264,6 @@ if (window.innerWidth > 768) {
                 transition: opacity 0.3s ease;
             `;
 
-      // Cursor outline
       this.$outline.style.cssText = `
                 position: fixed;
                 left: 0;
@@ -330,7 +308,6 @@ if (window.innerWidth > 768) {
         self.$outline.style.opacity = 0;
       });
 
-      // Enlarge cursor on interactive elements
       const interactiveElements =
         "a, button, .btn, .project-card, .skill-item, .social-link";
       document.querySelectorAll(interactiveElements).forEach((el) => {
@@ -360,11 +337,9 @@ if (window.innerWidth > 768) {
     },
   };
 
-  // Initialize custom cursor
   cursor.init();
 }
 
-// Performance optimization: throttle scroll events
 function throttle(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -377,14 +352,10 @@ function throttle(func, wait) {
   };
 }
 
-// Apply throttling to scroll events
 const throttledScrollHandler = throttle(() => {
-  // Existing scroll handlers here
-}, 16); // ~60fps
-
+}, 16);
 window.addEventListener("scroll", throttledScrollHandler);
 
-// Preloader (optional)
 window.addEventListener("load", () => {
   const preloader = document.createElement("div");
   preloader.id = "preloader";
@@ -425,7 +396,6 @@ window.addEventListener("load", () => {
   preloader.appendChild(loader);
   document.body.appendChild(preloader);
 
-  // Remove preloader after a short delay
   setTimeout(() => {
     preloader.style.opacity = "0";
     setTimeout(() => {
@@ -433,3 +403,4 @@ window.addEventListener("load", () => {
     }, 500);
   }, 1000);
 });
+
